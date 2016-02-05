@@ -95,11 +95,9 @@ end
 class Hash
 
   def to_query
-    collect do |k, v|
+    (collect do |k, v|
       "#{k}=#{CGI::escape(v.to_s)}"
-    end * '&'
+    end * '&').gsub"%2C",","
   end unless method_defined? :to_query
 
 end
-
-
